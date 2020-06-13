@@ -15,19 +15,23 @@ Add it in your root build.gradle at the end of repositories:
 
 ```
 allprojects {
-		repositories {
-			...
-			maven { url 'https://jitpack.io' }
-		}
+
+	repositories {
+		...
+		maven { url 'https://jitpack.io' }
 	}
+
+}
 
 ```
 
 Add the dependency
 ```
 dependencies {
-	        implementation 'com.github.dacaoyuan:YPKTabDemo:1.0.0'
-	}
+
+	  implementation 'com.github.dacaoyuan:YPKTabDemo:1.0.0'
+
+}
 
 ```
 
@@ -68,4 +72,8 @@ val tabTextList: MutableList<String> = ArrayList<String>()
         }
 
 ```
+
+
+## 优化计划
+   ...
 
