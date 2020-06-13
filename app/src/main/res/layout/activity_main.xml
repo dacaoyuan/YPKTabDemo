@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <com.ypk.library.view.YPKTabLayoutView
+        android:id="@+id/mYPKTabLayoutView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        app:arcControlX="30" />
+
+
+    <com.ypk.library.view.YPKTabLayoutView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        app:arcControlX="30"
+        app:view_bg_corners="0" />
+
+
+    <com.ypk.library.view.YPKTabLayoutView
+        android:id="@+id/mYPKTabLayoutView2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        app:arcControlX="30"
+        app:view_bg_corners="0" />
+
+
+</LinearLayout>

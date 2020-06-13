@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!--注意：自定义属性的名称必须和 自定义view的类名 一样在布局文件中才会有提示！-->
+    <declare-styleable name="YPKTabLayoutView">
+        <attr name="tabTextColor" format="color" />
+        <attr name="tabTextSize" format="float" />
+
+        <attr name="tab_view_bg" format="color" />
+        <attr name="select_tab_color" format="color" />
+        <!--值越大，弧度越大-->
+        <attr name="arcControlX" format="integer" />
+        <!--圆角的大小-->
+        <attr name="view_bg_corners" format="integer" />
+    </declare-styleable>
+
+
+</resources>

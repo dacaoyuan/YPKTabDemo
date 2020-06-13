@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+
+    <color name="tick_yellow">#f5d747</color>
+    <color name="tick_gray">#eaeaea</color>
+    <color name="tick_white">#fff</color>
+
+    <color name="tab_normal_color">#FFC7A4</color>
+    <color name="tab_select_color">#FE6C03</color>
+    <color name="tab_text_color">#454545</color>
+    <color name="green">#52C41A</color>
+
+</resources>
