@@ -1,3 +1,15 @@
+
+![](https://img.shields.io/badge/release-v1.0.0-brightgreen.svg)
+![](https://img.shields.io/badge/API-18%2B-orange.svg)
+
+
+<div align=center>
+
+![](https://img-blog.csdnimg.cn/20200613083956975.gif)
+
+</div>
+
+
 ## 远程依赖
 Add it in your root build.gradle at the end of repositories:
 
