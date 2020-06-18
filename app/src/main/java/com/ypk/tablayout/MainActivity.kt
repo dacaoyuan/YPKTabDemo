@@ -14,7 +14,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val tabTextList: MutableList<String> = ArrayList<String>()
+        val tabTextList: MutableList<String> = ArrayList<String>() as MutableList<String>
 
         tabTextList.add("推荐学习");
         tabTextList.add("企业学院");
@@ -40,6 +40,12 @@ class MainActivity : AppCompatActivity() {
         tabTextList2.add("待收货");
         tabTextList2.add("待评价");
         mYPKTabLayoutView2.setTabTextList(tabTextList2);
+
+
+        val tabTextList3: MutableList<String> = ArrayList<String>()
+        tabTextList3.add("首页");
+        tabTextList3.add("关注");
+        mYPKTabLayoutView3.setTabTextList(tabTextList3);
 
 
     }

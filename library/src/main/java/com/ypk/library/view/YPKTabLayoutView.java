@@ -41,7 +41,7 @@ public class YPKTabLayoutView extends View {
 
 
     private List<String> tabTextList;
-    private int view_bg_corners;//圆角的大小
+    private float view_bg_corners;//圆角的大小
     private int tabTextColor;
     private float tabTextSize;
     private int selectColor;
@@ -90,9 +90,9 @@ public class YPKTabLayoutView extends View {
             } else if (index == R.styleable.YPKTabLayoutView_tabTextColor) {
                 tabTextColor = typedArray.getColor(index, tabTextColor);
             } else if (index == R.styleable.YPKTabLayoutView_tabTextSize) {
-                tabTextSize = typedArray.getFloat(index, tabTextSize);
+                tabTextSize = typedArray.getDimension(index, tabTextSize);
             } else if (index == R.styleable.YPKTabLayoutView_view_bg_corners) {
-                view_bg_corners = typedArray.getInt(index, view_bg_corners);
+                view_bg_corners = typedArray.getDimension(index, view_bg_corners);
             }
 
         }
