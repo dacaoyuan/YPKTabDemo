@@ -1,7 +1,9 @@
 
+
+<div align=left>
 ![](https://img.shields.io/badge/release-v1.0.1-brightgreen.svg)
 ![](https://img.shields.io/badge/API-18%2B-orange.svg)
-
+</div>
 
 <div align=center>
 
