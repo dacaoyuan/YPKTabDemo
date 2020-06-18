@@ -1,5 +1,5 @@
 
-![](https://img.shields.io/badge/release-v1.0.2-brightgreen.svg)  ![](https://img.shields.io/badge/API-18%2B-orange.svg)
+![](https://img.shields.io/badge/release-v1.0.2-brightgreen.svg)
 
 
 <div align=center>
@@ -28,7 +28,7 @@ Add the dependency
 ```
 dependencies {
 
-	  implementation 'com.github.dacaoyuan:YPKTabDemo:1.0.1'
+	  implementation 'com.github.dacaoyuan:YPKTabDemo:1.0.2'
 
 }
 
