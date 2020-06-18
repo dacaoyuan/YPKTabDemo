@@ -19,6 +19,8 @@
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
         app:arcControlX="30"
+        app:tabTextColor="#fff"
+        app:tabTextSize="25"
         app:view_bg_corners="0" />
 
 

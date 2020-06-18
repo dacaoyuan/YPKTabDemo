@@ -116,8 +116,6 @@ public class YPKTabLayoutView extends View {
 
         textPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         textPaint.setStyle(Paint.Style.FILL);
-        textPaint.setTextSize(tabTextSize);
-        textPaint.setColor(tabTextColor);
 
 
         tabTextList = new ArrayList<>();
@@ -181,6 +179,8 @@ public class YPKTabLayoutView extends View {
 
         rectF_bg1 = new RectF(0 + 50, 0 + 50, viewWidth, viewHeight);
 
+        textPaint.setTextSize(tabTextSize);
+        textPaint.setColor(tabTextColor);
     }
 
 
@@ -288,7 +288,6 @@ public class YPKTabLayoutView extends View {
             paint.setColor(selectColor);
             canvas.drawPath(pathCenter, paint);
         }
-
 
         for (int i = 0; i < tabTextList.size(); i++) {
             String strTabText = tabTextList.get(i);
