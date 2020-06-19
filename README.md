@@ -4,7 +4,7 @@
 
 <div align=center>
 
-![](https://img-blog.csdnimg.cn/20200613111419278.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2RhX2Nhb3l1YW4=,size_16,color_FFFFFF,t_70)
+![](https://img-blog.csdnimg.cn/20200619114553680.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2RhX2Nhb3l1YW4=,size_16,color_FFFFFF,t_70)
 
 </div>
 
@@ -81,7 +81,7 @@ tabTextColor| tab的文字颜色
 tabTextSize| tab文字大小（单位：sp）
 tab_view_bg| 控件背景色
 select_tab_color| 选中后tab的背景色
-arcControlX| 值越大，曲线弧度越大（单位：px）
+arcControlX| 值越大，曲线弧度越大
 view_bg_corners| 控件的圆角大小（单位：dp）
 
 
