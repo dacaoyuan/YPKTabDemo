@@ -38,13 +38,15 @@ dependencies {
 ## 使用方法
 一：在xml布局中添加：
 ```
-<com.ypk.library.view.YPKTabLayoutView
+ <com.ypk.library.view.YPKTabLayoutView
         android:id="@+id/mYPKTabLayoutView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
-        app:view_bg_corners="0"
-        app:arcControlX="30" />
+        app:arcControlX="30"
+        app:tabTextColor="#fff"
+        app:tabTextSize="15sp"
+        app:view_bg_corners="0dp" />
 
 ```
 
@@ -71,6 +73,17 @@ val tabTextList: MutableList<String> = ArrayList<String>()
         }
 
 ```
+
+### 属性说明：
+属性     | 说明
+-------- | -----
+tabTextColor| tab的文字颜色
+tabTextSize| tab文字大小（单位：sp）
+tab_view_bg| 控件背景色
+select_tab_color| 选中后tab的背景色
+arcControlX| 值越大，曲线弧度越大（单位：px）
+view_bg_corners| 控件的圆角大小（单位：dp）
+
 
 
 ## 优化计划
