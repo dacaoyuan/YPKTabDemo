@@ -1,5 +1,6 @@
 package com.ypk.tablayout
 
+import android.graphics.Typeface
 import android.os.Bundle
 import android.view.Gravity
 import android.widget.Toast
@@ -20,7 +21,6 @@ class MainActivity : AppCompatActivity() {
         tabTextList.add("企业学院");
         tabTextList.add("我的关注");
         mYPKTabLayoutView.setTabTextList(tabTextList);
-
         mYPKTabLayoutView.addTabSelectedListener { tabPosition ->
             val makeText =
                 Toast.makeText(
@@ -40,7 +40,7 @@ class MainActivity : AppCompatActivity() {
         tabTextList2.add("待收货");
         tabTextList2.add("待评价");
         mYPKTabLayoutView2.setTabTextList(tabTextList2);
-
+        mYPKTabLayoutView2.setTabTextStyle(Typeface.BOLD)
 
         val tabTextList3: MutableList<String> = ArrayList<String>()
         tabTextList3.add("首页");

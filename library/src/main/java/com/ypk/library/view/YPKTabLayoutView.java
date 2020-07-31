@@ -7,6 +7,7 @@ import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.Rect;
 import android.graphics.RectF;
+import android.graphics.Typeface;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
@@ -43,8 +44,10 @@ public class YPKTabLayoutView extends View {
     private List<String> tabTextList;
     private float view_bg_corners;//圆角的大小
     private int tabTextColor;
-    private float tabTextSize;
     private int selectColor;
+
+    private float tabTextSize;
+    private int tabTextStyle;
     private int view_bg;
     private int arcControlX = 30;//值越大，弧度越大
     private int tabNumber;//tab的数量
@@ -93,7 +96,9 @@ public class YPKTabLayoutView extends View {
                 tabTextSize = typedArray.getDimension(index, tabTextSize);
             } else if (index == R.styleable.YPKTabLayoutView_view_bg_corners) {
                 view_bg_corners = typedArray.getDimension(index, view_bg_corners);
-            }
+            }/* else if (index == R.styleable.YPKTabLayoutView_tabTextStyle) {
+                tabTextStyle = typedArray.getInt(index, tabTextStyle);
+            }*/
 
         }
         typedArray.recycle();
@@ -103,12 +108,13 @@ public class YPKTabLayoutView extends View {
     RectF rectF_bg1;
 
     private void initData() {
+
         view_bg_corners = DisplayUtil.dp2px(mContext, 5);
         view_bg = ContextCompat.getColor(mContext, R.color.tab_select_color);
         selectColor = ContextCompat.getColor(mContext, R.color.tab_normal_color);
         tabTextColor = ContextCompat.getColor(mContext, R.color.tab_text_color);
         tabTextSize = DisplayUtil.sp2px(mContext, 14);
-
+        tabTextStyle = Typeface.NORMAL;
 
         paint = new Paint(Paint.ANTI_ALIAS_FLAG);
         paint.setStyle(Paint.Style.FILL);
@@ -116,7 +122,8 @@ public class YPKTabLayoutView extends View {
 
         textPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         textPaint.setStyle(Paint.Style.FILL);
-
+        Typeface font = Typeface.create(Typeface.SANS_SERIF, tabTextStyle);
+        textPaint.setTypeface(font);
 
         tabTextList = new ArrayList<>();
         tabTextList.add("tab01");
@@ -124,6 +131,18 @@ public class YPKTabLayoutView extends View {
         tabTextList.add("tab03");
         tabNumber = tabTextList.size();
 
+    }
+
+    /**
+     * 设置tab项文本的字体样式,默认Typeface.NORMAL
+     * Typeface.NORMAL  Typeface.BOLD  Typeface.ITALIC
+     *
+     * @param tabTextStyle
+     */
+    public void setTabTextStyle(int tabTextStyle) {
+        Typeface font = Typeface.create(Typeface.SANS_SERIF, tabTextStyle);
+        textPaint.setTypeface(font);
+        invalidate();
     }
 
     public void setTabTextList(List<String> tabTexts) {

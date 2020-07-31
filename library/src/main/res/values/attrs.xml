@@ -12,6 +12,11 @@
         <attr name="arcControlX" format="integer" />
         <!--圆角的大小-->
         <attr name="view_bg_corners" format="dimension" />
+
+        <!--字体样式-->
+       <!-- <attr name="tabTextStyle" format="enum">
+            <enum name="dd" value="Typeface.NORMAL"></enum>
+        </attr>-->
     </declare-styleable>
 
 
