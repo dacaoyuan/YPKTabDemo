@@ -28,7 +28,7 @@ Add the dependency
 ```
 dependencies {
 
-	  implementation 'com.github.dacaoyuan:YPKTabDemo:1.0.2'
+	  implementation 'com.github.dacaoyuan:YPKTabDemo:1.0.5'
 
 }
 
@@ -45,6 +45,7 @@ dependencies {
         android:layout_margin="10dp"
         app:arcControlX="30"
         app:tabTextColor="#fff"
+        app:tabSelectTextColor="#fff"
         app:tabTextSize="15sp"
         app:view_bg_corners="0dp" />
 
@@ -78,6 +79,7 @@ val tabTextList: MutableList<String> = ArrayList<String>()
 属性     | 说明
 -------- | -----
 tabTextColor| tab的文字颜色
+tabSelectTextColor| tab的文字选中颜色
 tabTextSize| tab文字大小（单位：sp）
 tab_view_bg| 控件背景色
 select_tab_color| 选中后tab的背景色
@@ -89,3 +91,7 @@ view_bg_corners| 控件的圆角大小（单位：dp）
 ## 优化计划
    ...
 
+###版本更新说明：
+#### 1.0.5
+1：支持了tab文本字体样式
+2：支持了文本选中颜色设置

@@ -44,6 +44,7 @@ public class YPKTabLayoutView extends View {
     private List<String> tabTextList;
     private float view_bg_corners;//圆角的大小
     private int tabTextColor;
+    private int tabSelectTextColor;
     private int selectColor;
 
     private float tabTextSize;
@@ -83,7 +84,6 @@ public class YPKTabLayoutView extends View {
 
         for (int i = 0; i < indexCount; i++) {
             int index = typedArray.getIndex(i);
-
             if (index == R.styleable.YPKTabLayoutView_arcControlX) {
                 arcControlX = typedArray.getInt(index, arcControlX);
             } else if (index == R.styleable.YPKTabLayoutView_select_tab_color) {
@@ -92,13 +92,14 @@ public class YPKTabLayoutView extends View {
                 view_bg = typedArray.getColor(index, view_bg);
             } else if (index == R.styleable.YPKTabLayoutView_tabTextColor) {
                 tabTextColor = typedArray.getColor(index, tabTextColor);
+            } else if (index == R.styleable.YPKTabLayoutView_tabSelectTextColor) {
+                tabSelectTextColor = typedArray.getColor(index, tabSelectTextColor);
             } else if (index == R.styleable.YPKTabLayoutView_tabTextSize) {
                 tabTextSize = typedArray.getDimension(index, tabTextSize);
             } else if (index == R.styleable.YPKTabLayoutView_view_bg_corners) {
                 view_bg_corners = typedArray.getDimension(index, view_bg_corners);
-            }/* else if (index == R.styleable.YPKTabLayoutView_tabTextStyle) {
-                tabTextStyle = typedArray.getInt(index, tabTextStyle);
-            }*/
+            }
+
 
         }
         typedArray.recycle();
@@ -113,6 +114,8 @@ public class YPKTabLayoutView extends View {
         view_bg = ContextCompat.getColor(mContext, R.color.tab_select_color);
         selectColor = ContextCompat.getColor(mContext, R.color.tab_normal_color);
         tabTextColor = ContextCompat.getColor(mContext, R.color.tab_text_color);
+        //默认选中文本和未选中文本是一个颜色值
+        tabSelectTextColor = ContextCompat.getColor(mContext, R.color.tab_text_color);
         tabTextSize = DisplayUtil.sp2px(mContext, 14);
         tabTextStyle = Typeface.NORMAL;
 
@@ -314,6 +317,13 @@ public class YPKTabLayoutView extends View {
             textPaint.getTextBounds(strTabText, 0, strTabText.length(), rectText);
             int strWidth = rectText.width();
             int strHeight = rectText.height();
+
+            if (i == tabPosition) {//选中的tab项文本
+                textPaint.setColor(tabSelectTextColor);
+            } else {
+                textPaint.setColor(tabTextColor);
+            }
+
             if (i == 0) {
                 canvas.drawText(strTabText, (textWidth + arcWidth / 2) / 2 - strWidth / 2, viewHeight / 2 + strHeight / 2, textPaint);
             } else if (i == tabTextList.size() - 1) {
@@ -322,6 +332,7 @@ public class YPKTabLayoutView extends View {
             } else {
                 canvas.drawText(strTabText, textWidth * i + arcWidth * (i - 1) + (textWidth + 2 * arcWidth) / 2 - strWidth / 2, viewHeight / 2 + strHeight / 2, textPaint);
             }
+
 
         }
 

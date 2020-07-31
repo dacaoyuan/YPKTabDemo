@@ -19,6 +19,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
         app:arcControlX="30"
+        app:tabSelectTextColor="#fff"
         app:tabTextColor="#fff"
         app:tabTextSize="15sp"
         app:view_bg_corners="0dp" />
@@ -39,6 +40,8 @@
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
         app:arcControlX="30"
+        app:tabSelectTextColor="@color/text_33"
+        app:tabTextColor="@color/text_66"
         app:view_bg_corners="0dp" />
 
 
