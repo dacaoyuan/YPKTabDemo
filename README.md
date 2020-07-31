@@ -1,5 +1,5 @@
 
-![](https://img.shields.io/badge/release-v1.0.2-brightgreen.svg)
+![](https://img.shields.io/badge/release-v1.0.5-brightgreen.svg)
 
 
 <div align=center>
