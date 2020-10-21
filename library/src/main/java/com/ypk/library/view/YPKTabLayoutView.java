@@ -140,6 +140,9 @@ public class YPKTabLayoutView extends View {
         if (tabPosition < tabNumber) {
             this.tabPosition = tabPosition;
             invalidate();
+            if (onTabClickListener != null) {
+                onTabClickListener.tabSelectedListener(tabPosition);
+            }
         }
     }
 
