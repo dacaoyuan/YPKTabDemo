@@ -41,6 +41,7 @@ class MainActivity : AppCompatActivity() {
         tabTextList2.add("待评价");
         mYPKTabLayoutView2.setTabTextList(tabTextList2);
         mYPKTabLayoutView2.setTabTextStyle(Typeface.BOLD)
+        mYPKTabLayoutView2.setSelectTab(1)//设置默认选中第二tab
 
         val tabTextList3: MutableList<String> = ArrayList<String>()
         tabTextList3.add("首页");

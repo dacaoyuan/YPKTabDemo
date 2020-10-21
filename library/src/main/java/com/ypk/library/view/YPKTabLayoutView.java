@@ -136,6 +136,13 @@ public class YPKTabLayoutView extends View {
 
     }
 
+    public void setSelectTab(int tabPosition) {
+        if (tabPosition < tabNumber) {
+            this.tabPosition = tabPosition;
+            invalidate();
+        }
+    }
+
     /**
      * 设置tab项文本的字体样式,默认Typeface.NORMAL
      * Typeface.NORMAL  Typeface.BOLD  Typeface.ITALIC

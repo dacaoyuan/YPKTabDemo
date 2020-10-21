@@ -28,7 +28,7 @@ Add the dependency
 ```
 dependencies {
 
-	  implementation 'com.github.dacaoyuan:YPKTabDemo:1.0.5'
+	  implementation 'com.github.dacaoyuan:YPKTabDemo:1.0.6'
 
 }
 
@@ -89,6 +89,9 @@ view_bg_corners| 控件的圆角大小（单位：dp）
 
 
 ## 版本更新说明：
+### 1.0.6
+1：新增了设置默认选中tab想的功能
+
 ### 1.0.5
 1：支持了tab文本字体样式
 2：支持了文本选中颜色设置
