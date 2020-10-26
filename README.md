@@ -1,5 +1,5 @@
 
-![](https://img.shields.io/badge/release-v1.0.5-brightgreen.svg)
+![](https://img.shields.io/badge/release-v1.2.0-brightgreen.svg)
 
 
 <div align=center>
@@ -28,7 +28,7 @@ Add the dependency
 ```
 dependencies {
 
-	  implementation 'com.github.dacaoyuan:YPKTabDemo:1.0.7'
+	  implementation 'com.github.dacaoyuan:YPKTabDemo:1.2.0'
 
 }
 
@@ -62,16 +62,18 @@ val tabTextList: MutableList<String> = ArrayList<String>()
         tabTextList.add("我的关注");
         mYPKTabLayoutView.setTabTextList(tabTextList);
 
-        mYPKTabLayoutView.addTabSelectedListener { tabPosition ->
-            val makeText =
-                Toast.makeText(
-                    this@MainActivity,
-                    "点击了第" + tabPosition + "项",
-                    Toast.LENGTH_SHORT
-                )
-            makeText.setGravity(Gravity.CENTER, 0, 0);
-            makeText.show();
-        }
+       mYPKTabLayoutView.addTabSelectedListener(object : OnTabClickListener {
+                   override fun tabSelectedListener(tabPosition: Int) {
+                       val makeText =
+                           Toast.makeText(
+                               this@MainActivity,
+                               "点击了第" + tabPosition + "项",
+                               Toast.LENGTH_SHORT
+                           )
+                       makeText.setGravity(Gravity.CENTER, 0, 0);
+                       makeText.show();
+                   }
+         })
 
 ```
 
@@ -89,6 +91,10 @@ view_bg_corners| 控件的圆角大小（单位：dp）
 
 
 ## 版本更新说明：
+### 1.2.0
+1：特别说明自1.2.0版本开始，代码已改为kotlin语言。
+
+
 ### 1.0.6
 1：新增了设置默认选中tab项的功能
 

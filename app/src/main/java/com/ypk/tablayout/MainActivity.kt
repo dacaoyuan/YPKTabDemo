@@ -21,16 +21,20 @@ class MainActivity : AppCompatActivity() {
         tabTextList.add("企业学院");
         tabTextList.add("我的关注");
         mYPKTabLayoutView.setTabTextList(tabTextList);
-        mYPKTabLayoutView.addTabSelectedListener { tabPosition ->
-            val makeText =
-                Toast.makeText(
-                    this@MainActivity,
-                    "点击了第" + tabPosition + "项",
-                    Toast.LENGTH_SHORT
-                )
-            makeText.setGravity(Gravity.CENTER, 0, 0);
-            makeText.show();
-        }
+
+        mYPKTabLayoutView.addTabSelectedListener(object : OnTabClickListener {
+            override fun tabSelectedListener(tabPosition: Int) {
+                val makeText =
+                    Toast.makeText(
+                        this@MainActivity,
+                        "点击了第" + tabPosition + "项",
+                        Toast.LENGTH_SHORT
+                    )
+                makeText.setGravity(Gravity.CENTER, 0, 0);
+                makeText.show();
+            }
+
+        })
 
 
         val tabTextList2: MutableList<String> = ArrayList<String>()

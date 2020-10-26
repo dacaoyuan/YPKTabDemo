@@ -15,7 +15,6 @@ import android.view.View;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 
-
 import com.ypk.library.R;
 import com.ypk.library.interfac.OnTabClickListener;
 import com.ypk.library.utils.DisplayUtil;
@@ -28,7 +27,7 @@ import java.util.List;
  * @CreateDate: 2020/4/24 16:32
  * @Description:
  */
-public class YPKTabLayoutView extends View {
+public class YPKTabLayoutView2 extends View {
 
     private Context mContext;
     private Paint paint;
@@ -61,15 +60,15 @@ public class YPKTabLayoutView extends View {
     //private int strokeWidth = 2;
 
 
-    public YPKTabLayoutView(Context context) {
+    public YPKTabLayoutView2(Context context) {
         this(context, null);
     }
 
-    public YPKTabLayoutView(Context context, @Nullable AttributeSet attrs) {
+    public YPKTabLayoutView2(Context context, @Nullable AttributeSet attrs) {
         this(context, attrs, 0);
     }
 
-    public YPKTabLayoutView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
+    public YPKTabLayoutView2(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         mContext = context;
         initData();
