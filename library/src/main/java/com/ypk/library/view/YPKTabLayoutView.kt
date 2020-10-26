@@ -15,6 +15,35 @@ import com.ypk.library.utils.DisplayUtil.sp2px
  * @Author: YuanPeikai
  * @CreateDate: 2020/4/24 16:32
  * @Description:
+ *
+ * class YPKTabLayoutView @JvmOverloads constructor(
+ * private val mContext: Context,
+ * attrs: AttributeSet? = null,
+ * defStyleAttr: Int = 0
+ * ) : View(mContext, attrs, defStyleAttr) {
+ *   init {
+ *     initData()
+ *     initAttr(attrs, defStyleAttr)
+ *    }
+ * 、、、
+ *}
+ *
+ * 相当于 Java中
+ *
+ *public YPKTabLayoutView2(Context context) {
+ *this(context, null);
+ *}
+
+ *public YPKTabLayoutView2(Context context, @Nullable AttributeSet attrs) {
+ *this(context, attrs, 0);
+ *}
+
+ *public YPKTabLayoutView2(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
+ *super(context, attrs, defStyleAttr);
+ *mContext = context;
+ *initData();
+ *initAttr(attrs, defStyleAttr);
+ *}
  */
 class YPKTabLayoutView @JvmOverloads constructor(
     private val mContext: Context,

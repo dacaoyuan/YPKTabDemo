@@ -40,8 +40,8 @@
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
         app:arcControlX="30"
-        app:tabSelectTextColor="@color/text_33"
-        app:tabTextColor="@color/text_66"
+        app:tabSelectTextColor="@color/colorAccent"
+        app:tabTextColor="@color/text_33"
         app:view_bg_corners="0dp" />
 
 
