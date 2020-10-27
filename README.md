@@ -101,3 +101,6 @@ view_bg_corners| 控件的圆角大小（单位：dp）
 ### 1.0.5
 1：支持了tab文本字体样式
 2：支持了文本选中颜色设置
+
+## 实现思路详解
+csdn地址：https://blog.csdn.net/da_caoyuan/article/details/106332632
