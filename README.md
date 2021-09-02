@@ -93,6 +93,7 @@ tab_indicator_height| 指示线的高度（单位：dp）
 tab_indicator_spacing| 指示线的与文字的间隔（单位：dp）
 
 
+
 ## 版本更新说明：
 ### 1.2.1
 1：新增了指示器显示。
