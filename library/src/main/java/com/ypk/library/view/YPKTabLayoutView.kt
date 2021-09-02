@@ -66,7 +66,7 @@ class YPKTabLayoutView @JvmOverloads constructor(
     private var viewWidth = 0
     private var viewHeight = 0 //测量的高度，与 customizeViewDefaultHeight 相等
 
-    private val customizeViewDefaultHeight = 100 //自定义的控件默认高度
+    private var customizeViewDefaultHeight = dp2px(mContext, 45f) //自定义的控件默认高度
     private var textWidth = 0f
     private var tabPosition = 0
     private lateinit var tabTextList: MutableList<String>
