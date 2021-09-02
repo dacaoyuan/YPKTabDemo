@@ -28,7 +28,7 @@ Add the dependency
 ```
 dependencies {
 
-	  implementation 'com.github.dacaoyuan:YPKTabDemo:1.2.0'
+	  implementation 'com.github.dacaoyuan:YPKTabDemo:1.2.1'
 
 }
 
@@ -91,6 +91,9 @@ view_bg_corners| 控件的圆角大小（单位：dp）
 
 
 ## 版本更新说明：
+### 1.2.1
+1：新增了指示器显示。
+
 ### 1.2.0
 1：特别说明自1.2.0版本开始，代码已改为kotlin语言。
 

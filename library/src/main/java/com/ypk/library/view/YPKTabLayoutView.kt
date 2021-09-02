@@ -16,6 +16,10 @@ import com.ypk.library.utils.DisplayUtil.sp2px
  * @CreateDate: 2020/4/24 16:32
  * @Description:
  *
+ * rQuadTo 和 cubicTo的区别：
+ * cubicTo：坐标点都是基于原点的（0,0）
+ * rQuadTo：是基于画笔上一次终点坐标的
+ *
  * class YPKTabLayoutView @JvmOverloads constructor(
  * private val mContext: Context,
  * attrs: AttributeSet? = null,
@@ -52,12 +56,13 @@ class YPKTabLayoutView @JvmOverloads constructor(
 ) : View(mContext, attrs, defStyleAttr) {
 
     init {
-        initData()
+        setDefaultData()
         initAttr(attrs, defStyleAttr)
     }
 
     private lateinit var paint: Paint
     private lateinit var textPaint: Paint
+    private lateinit var indicatorPaint: Paint
     private var viewWidth = 0
     private var viewHeight = 0 //测量的高度，与 customizeViewDefaultHeight 相等
 
@@ -81,6 +86,48 @@ class YPKTabLayoutView @JvmOverloads constructor(
     private var centerX = 0
     private var centerY = 0
 
+    private var showTabIndicator = false//默认不显示指示线
+    private var showTabIndicatorSelect = false
+
+    //private var tabIndicatorColor = 0;//指示线的颜色
+    private var tabIndicatorHeight = 0f;//指示线的高度
+    private var tabIndicatorSpacing = 0f;//指示线的与文字的间隔
+
+    lateinit var rectF_bg: RectF
+    lateinit var rectF_bg1: RectF
+    private fun setDefaultData() {
+        view_bg_corners = dp2px(mContext, 5f).toFloat()
+        view_bg = ContextCompat.getColor(mContext, R.color.tab_select_color)
+        selectColor = ContextCompat.getColor(mContext, R.color.tab_normal_color)
+        tabTextColor = ContextCompat.getColor(mContext, R.color.tab_text_color)
+        //默认选中文本和未选中文本是一个颜色值
+        tabSelectTextColor = ContextCompat.getColor(mContext, R.color.tab_text_color)
+
+        val font = Typeface.create(Typeface.SANS_SERIF, tabTextStyle)
+
+        //tabIndicatorColor = tabSelectTextColor
+        tabIndicatorHeight = dp2px(mContext, 2f).toFloat()
+        tabIndicatorSpacing = dp2px(mContext, 5f).toFloat()
+        indicatorPaint = Paint(Paint.ANTI_ALIAS_FLAG)
+        indicatorPaint!!.style = Paint.Style.FILL
+        indicatorPaint!!.typeface = font
+
+        tabTextSize = sp2px(mContext, 14f).toFloat()
+        tabTextStyle = Typeface.NORMAL
+        paint = Paint(Paint.ANTI_ALIAS_FLAG)
+        paint!!.style = Paint.Style.FILL
+        textPaint = Paint(Paint.ANTI_ALIAS_FLAG)
+        textPaint!!.style = Paint.Style.FILL
+
+        textPaint!!.typeface = font
+
+        tabTextList = ArrayList()
+
+        tabTextList.add("tab01")
+        tabTextList.add("tab02")
+        tabTextList.add("tab03")
+        tabNumber = tabTextList.size
+    }
 
     private fun initAttr(attrs: AttributeSet?, defStyleAttr: Int) {
         val typedArray = mContext.obtainStyledAttributes(
@@ -106,36 +153,19 @@ class YPKTabLayoutView @JvmOverloads constructor(
                 tabTextSize = typedArray.getDimension(index, tabTextSize)
             } else if (index == R.styleable.YPKTabLayoutView_view_bg_corners) {
                 view_bg_corners = typedArray.getDimension(index, view_bg_corners)
+            } else if (index == R.styleable.YPKTabLayoutView_tab_indicator_height) {
+                tabIndicatorHeight = typedArray.getDimension(index, tabIndicatorHeight)
+            } else if (index == R.styleable.YPKTabLayoutView_tab_indicator_spacing) {
+                tabIndicatorSpacing = typedArray.getDimension(index, tabIndicatorSpacing)
+            } else if (index == R.styleable.YPKTabLayoutView_show_indicator) {
+                showTabIndicator = typedArray.getBoolean(index, showTabIndicator)
+            } else if (index == R.styleable.YPKTabLayoutView_show_indicator_select) {
+                showTabIndicatorSelect = typedArray.getBoolean(index, showTabIndicatorSelect)
             }
         }
         typedArray.recycle()
     }
 
-    lateinit var rectF_bg: RectF
-    lateinit var rectF_bg1: RectF
-    private fun initData() {
-        view_bg_corners = dp2px(mContext, 5f).toFloat()
-        view_bg = ContextCompat.getColor(mContext, R.color.tab_select_color)
-        selectColor = ContextCompat.getColor(mContext, R.color.tab_normal_color)
-        tabTextColor = ContextCompat.getColor(mContext, R.color.tab_text_color)
-        //默认选中文本和未选中文本是一个颜色值
-        tabSelectTextColor = ContextCompat.getColor(mContext, R.color.tab_text_color)
-        tabTextSize = sp2px(mContext, 14f).toFloat()
-        tabTextStyle = Typeface.NORMAL
-        paint = Paint(Paint.ANTI_ALIAS_FLAG)
-        paint!!.style = Paint.Style.FILL
-        textPaint = Paint(Paint.ANTI_ALIAS_FLAG)
-        textPaint!!.style = Paint.Style.FILL
-        val font = Typeface.create(Typeface.SANS_SERIF, tabTextStyle)
-        textPaint!!.typeface = font
-
-        tabTextList = ArrayList()
-
-        tabTextList.add("tab01")
-        tabTextList.add("tab02")
-        tabTextList.add("tab03")
-        tabNumber = tabTextList.size
-    }
 
     fun setSelectTab(tabPosition: Int) {
         if (tabPosition < tabNumber) {
@@ -156,6 +186,7 @@ class YPKTabLayoutView @JvmOverloads constructor(
     fun setTabTextStyle(tabTextStyle: Int) {
         val font = Typeface.create(Typeface.SANS_SERIF, tabTextStyle)
         textPaint!!.typeface = font
+        indicatorPaint!!.typeface = font
         invalidate()
     }
 
@@ -200,6 +231,9 @@ class YPKTabLayoutView @JvmOverloads constructor(
             RectF((0 + 50).toFloat(), (0 + 50).toFloat(), viewWidth.toFloat(), viewHeight.toFloat())
         textPaint!!.textSize = tabTextSize
         textPaint!!.color = tabTextColor
+        indicatorPaint!!.color = tabTextColor
+        indicatorPaint.strokeWidth = tabIndicatorHeight
+
     }
 
     override fun onTouchEvent(event: MotionEvent): Boolean {
@@ -254,13 +288,14 @@ class YPKTabLayoutView @JvmOverloads constructor(
             //最左边的图形
             val pathLeft = Path()
             pathLeft.lineTo(textWidth, 0f)
-            pathLeft.cubicTo(
-                textWidth + arcControlX,
-                arcControlY.toFloat(),
-                textWidth + arcWidth - arcControlX,
-                viewHeight - arcControlY.toFloat(),
-                textWidth + arcWidth,
-                viewHeight.toFloat()
+            /* pathLeft.cubicTo(textWidth + arcControlX, arcControlY.toFloat(),
+                 textWidth + arcWidth - arcControlX, viewHeight - arcControlY.toFloat(),
+                 textWidth + arcWidth, viewHeight.toFloat()
+             )*/
+            pathLeft.rCubicTo(
+                arcControlX.toFloat(), arcControlY.toFloat(),
+                arcWidth.toFloat() - arcControlX, viewHeight - arcControlY.toFloat(),
+                arcWidth.toFloat(), viewHeight.toFloat()
             )
             pathLeft.lineTo(0f, viewHeight.toFloat())
             pathLeft.lineTo(0f, 0f)
@@ -271,13 +306,18 @@ class YPKTabLayoutView @JvmOverloads constructor(
             val pathRight = Path()
             pathRight.moveTo(viewWidth.toFloat(), 0f)
             pathRight.lineTo(viewWidth - textWidth, 0f)
-            pathRight.cubicTo(
+            /*pathRight.cubicTo(
                 viewWidth - textWidth - arcControlX,
                 arcControlY.toFloat(),
                 viewWidth - textWidth - arcWidth + arcControlX,
                 viewHeight - arcControlY.toFloat(),
                 viewWidth - textWidth - arcWidth,
                 viewHeight.toFloat()
+            )*/
+            pathRight.rCubicTo(
+                -arcControlX.toFloat(), arcControlY.toFloat(),
+                -arcWidth.toFloat() + arcControlX, viewHeight - arcControlY.toFloat(),
+                -arcWidth.toFloat(), viewHeight.toFloat()
             )
             pathRight.lineTo(viewWidth.toFloat(), viewHeight.toFloat())
             pathRight.lineTo(viewWidth.toFloat(), 0f)
@@ -288,12 +328,20 @@ class YPKTabLayoutView @JvmOverloads constructor(
             //中间的图形
             val pathCenter = Path()
             pathCenter.moveTo(tabPosition * textWidth + tabPosition * arcWidth, 0f)
-            pathCenter.cubicTo(
+            /*pathCenter.cubicTo(
                 tabPosition * textWidth + tabPosition * arcWidth - arcControlX,
                 arcControlY.toFloat(),
                 tabPosition * textWidth + tabPosition * arcWidth - arcWidth + arcControlX,
                 viewHeight - arcControlY.toFloat(),
                 tabPosition * textWidth + tabPosition * arcWidth - arcWidth,
+                viewHeight.toFloat()
+            )*/
+            pathCenter.rCubicTo(
+                -arcControlX.toFloat(),
+                arcControlY.toFloat(),
+                -arcWidth.toFloat() + arcControlX,
+                viewHeight - arcControlY.toFloat(),
+                -arcWidth.toFloat(),
                 viewHeight.toFloat()
             )
             pathCenter.lineTo(
@@ -308,10 +356,15 @@ class YPKTabLayoutView @JvmOverloads constructor(
                 tabPosition * textWidth + tabPosition * arcWidth + textWidth,
                 0f
             )
+
             pathCenter.lineTo(tabPosition * textWidth + tabPosition * arcWidth, 0f)
             paint!!.color = selectColor
             canvas.drawPath(pathCenter, paint!!)
         }
+        drawTextContent(canvas)
+    }
+
+    private fun drawTextContent(canvas: Canvas) {
         for (i in tabTextList!!.indices) {
             val strTabText = tabTextList!![i]
             val rectText = Rect()
@@ -320,8 +373,14 @@ class YPKTabLayoutView @JvmOverloads constructor(
             val strHeight = rectText.height()
             if (i == tabPosition) { //选中的tab项文本
                 textPaint!!.color = tabSelectTextColor
+                indicatorPaint!!.color = tabSelectTextColor
             } else {
                 textPaint!!.color = tabTextColor
+                if (showTabIndicatorSelect) {
+                    indicatorPaint!!.color = Color.TRANSPARENT
+                } else {
+                    indicatorPaint!!.color = tabTextColor
+                }
             }
             if (i == 0) {
                 canvas.drawText(
@@ -330,6 +389,21 @@ class YPKTabLayoutView @JvmOverloads constructor(
                     viewHeight / 2 + strHeight / 2.toFloat(),
                     textPaint!!
                 )
+                if (showTabIndicator||showTabIndicatorSelect) {
+                    val maxSpace = viewHeight / 2 - strHeight / 2.toFloat()
+                    if (tabIndicatorSpacing > maxSpace) {
+                        tabIndicatorSpacing = maxSpace;
+                    }
+                    canvas.drawLine(
+                        (textWidth + arcWidth / 2) / 2 - strWidth / 2,
+                        viewHeight / 2 + strHeight / 2.toFloat() + tabIndicatorSpacing,
+                        (textWidth + arcWidth / 2) / 2 - strWidth / 2 + strWidth,
+                        viewHeight / 2 + strHeight / 2.toFloat() + tabIndicatorSpacing,
+                        indicatorPaint
+                    )
+                }
+
+
             } else if (i == tabTextList!!.size - 1) {
                 canvas.drawText(
                     strTabText,
@@ -337,6 +411,21 @@ class YPKTabLayoutView @JvmOverloads constructor(
                     viewHeight / 2 + strHeight / 2.toFloat(),
                     textPaint!!
                 )
+                if (showTabIndicator||showTabIndicatorSelect) {
+                    val maxSpace = viewHeight / 2 - strHeight / 2.toFloat()
+                    if (tabIndicatorSpacing > maxSpace) {
+                        tabIndicatorSpacing = maxSpace;
+                    }
+                    canvas.drawLine(
+                        viewWidth - (textWidth + arcWidth / 2) / 2 - strWidth / 2,
+                        viewHeight / 2 + strHeight / 2.toFloat() + tabIndicatorSpacing,
+                        viewWidth - (textWidth + arcWidth / 2) / 2 - strWidth / 2 + strWidth,
+                        viewHeight / 2 + strHeight / 2.toFloat() + tabIndicatorSpacing,
+                        indicatorPaint
+                    )
+                }
+
+
             } else {
                 canvas.drawText(
                     strTabText,
@@ -344,6 +433,21 @@ class YPKTabLayoutView @JvmOverloads constructor(
                     viewHeight / 2 + strHeight / 2.toFloat(),
                     textPaint!!
                 )
+
+                if (showTabIndicator||showTabIndicatorSelect) {
+                    val maxSpace = viewHeight / 2 - strHeight / 2.toFloat()
+                    if (tabIndicatorSpacing > maxSpace) {
+                        tabIndicatorSpacing = maxSpace;
+                    }
+                    canvas.drawLine(
+                        textWidth * i + arcWidth * (i - 1) + (textWidth + 2 * arcWidth) / 2 - strWidth / 2,
+                        viewHeight / 2 + strHeight / 2.toFloat() + tabIndicatorSpacing,
+                        textWidth * i + arcWidth * (i - 1) + (textWidth + 2 * arcWidth) / 2 - strWidth / 2 + strWidth,
+                        viewHeight / 2 + strHeight / 2.toFloat() + tabIndicatorSpacing,
+                        indicatorPaint
+                    )
+                }
+
             }
         }
     }

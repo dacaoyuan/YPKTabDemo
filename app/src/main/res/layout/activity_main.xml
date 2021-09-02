@@ -42,6 +42,9 @@
         app:arcControlX="30"
         app:tabSelectTextColor="@color/colorAccent"
         app:tabTextColor="@color/text_33"
+        app:tab_indicator_height="1dp"
+        app:show_indicator_select="true"
+        app:tab_indicator_spacing="5dp"
         app:view_bg_corners="0dp" />
 
 
