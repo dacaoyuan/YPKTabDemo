@@ -87,7 +87,10 @@ tab_view_bg| 控件背景色
 select_tab_color| 选中后tab的背景色
 arcControlX| 值越大，曲线弧度越大
 view_bg_corners| 控件的圆角大小（单位：dp）
-
+show_indicator_select| 是否只有选中才显示指示线
+show_indicator| 是否显示指示线
+tab_indicator_height| 指示线的高度（单位：dp）
+tab_indicator_spacing| 指示线的与文字的间隔（单位：dp）
 
 
 ## 版本更新说明：
