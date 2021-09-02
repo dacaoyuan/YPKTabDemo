@@ -28,7 +28,7 @@ Add the dependency
 ```
 dependencies {
 
-	  implementation 'com.github.dacaoyuan:YPKTabDemo:1.2.1'
+	  implementation 'com.github.dacaoyuan:YPKTabDemo:1.2.2'
 
 }
 
