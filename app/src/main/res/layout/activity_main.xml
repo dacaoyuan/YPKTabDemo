@@ -40,12 +40,23 @@
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
         app:arcControlX="30"
+        app:show_indicator_select="true"
         app:tabSelectTextColor="@color/colorAccent"
         app:tabTextColor="@color/text_33"
         app:tab_indicator_height="1dp"
-        app:show_indicator_select="true"
         app:tab_indicator_spacing="5dp"
         app:view_bg_corners="0dp" />
 
+    <com.ypk.library.view.YPKTabLayoutViewJava
+        android:id="@+id/mYPKTabLayoutView4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        app:arcControlX="30"
+        app:show_indicator_select="true"
+        app:tabSelectTextColor="@color/colorAccent"
+        app:tabTextColor="@color/text_33"
+        app:tab_indicator_height="1dp"
+        app:tab_indicator_spacing="5dp" />
 
 </LinearLayout>

@@ -52,7 +52,12 @@ class MainActivity : AppCompatActivity() {
         tabTextList3.add("关注");
         mYPKTabLayoutView3.setTabTextList(tabTextList3);
 
-
+        val tabTextList4: MutableList<String> = ArrayList<String>()
+        tabTextList4.add("Java1");
+        tabTextList4.add("Java2");
+        tabTextList4.add("Java3");
+        tabTextList4.add("Java4");
+        mYPKTabLayoutView4.setTabTextList(tabTextList4);
     }
 
 

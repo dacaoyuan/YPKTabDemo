@@ -3,6 +3,7 @@ package com.ypk.library.view;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.Rect;
@@ -27,52 +28,95 @@ import java.util.List;
  * @CreateDate: 2020/4/24 16:32
  * @Description:
  */
-public class YPKTabLayoutView2 extends View {
+public class YPKTabLayoutViewJava extends View {
 
     private Context mContext;
     private Paint paint;
     private Paint textPaint;
+    private Paint indicatorPaint;
     private int viewWidth;
     private int viewHeight;//测量的高度，与 customizeViewDefaultHeight 相等
 
-    private int customizeViewDefaultHeight = 100;//自定义的控件默认高度
+    private int customizeViewDefaultHeight;//自定义的控件默认高度
     private float textWidth;
     private int tabPosition = 0;
-
-
     private List<String> tabTextList;
     private float view_bg_corners;//圆角的大小
+
     private int tabTextColor;
     private int tabSelectTextColor;
     private int selectColor;
-
     private float tabTextSize;
     private int tabTextStyle;
     private int view_bg;
     private int arcControlX = 30;//值越大，弧度越大
     private int tabNumber;//tab的数量
 
-
     private int arcControlY = 3;
     private int arcWidth = 50;//曲线的宽度
+    private int centerX;
+    private int centerY;
 
-    private int centerX, centerY;
-    //private int strokeWidth = 2;
+    private boolean showTabIndicator;//默认不显示指示线
+    private boolean showTabIndicatorSelect;
 
+    //private float tabIndicatorColor = 0;//指示线的颜色
+    private float tabIndicatorHeight = 0f;//指示线的高度
+    private float tabIndicatorSpacing = 0f;//指示线的与文字的间隔
 
-    public YPKTabLayoutView2(Context context) {
+    RectF rectF_bg;
+    RectF rectF_bg1;
+
+    public YPKTabLayoutViewJava(Context context) {
         this(context, null);
     }
 
-    public YPKTabLayoutView2(Context context, @Nullable AttributeSet attrs) {
+    public YPKTabLayoutViewJava(Context context, @Nullable AttributeSet attrs) {
         this(context, attrs, 0);
     }
 
-    public YPKTabLayoutView2(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
+    public YPKTabLayoutViewJava(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         mContext = context;
-        initData();
+        customizeViewDefaultHeight = DisplayUtil.dp2px(mContext, 45f);
+        setDefaultData();
         initAttr(attrs, defStyleAttr);
+    }
+
+    private void setDefaultData() {
+
+        view_bg_corners = DisplayUtil.dp2px(mContext, 5);
+        view_bg = ContextCompat.getColor(mContext, R.color.tab_select_color);
+        selectColor = ContextCompat.getColor(mContext, R.color.tab_normal_color);
+        tabTextColor = ContextCompat.getColor(mContext, R.color.tab_text_color);
+        //默认选中文本和未选中文本是一个颜色值
+        tabSelectTextColor = ContextCompat.getColor(mContext, R.color.tab_text_color);
+
+        Typeface font = Typeface.create(Typeface.SANS_SERIF, tabTextStyle);
+
+        //tabIndicatorColor = tabSelectTextColor
+        tabIndicatorHeight = DisplayUtil.dp2px(mContext, 2f);
+        tabIndicatorSpacing = DisplayUtil.dp2px(mContext, 5f);
+        indicatorPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+        indicatorPaint.setStyle(Paint.Style.FILL);
+        indicatorPaint.setTypeface(font);
+
+        tabTextSize = DisplayUtil.sp2px(mContext, 14);
+        tabTextStyle = Typeface.NORMAL;
+        paint = new Paint(Paint.ANTI_ALIAS_FLAG);
+        paint.setStyle(Paint.Style.FILL);
+        textPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+        textPaint.setStyle(Paint.Style.FILL);
+
+        textPaint.setTypeface(font);
+
+        tabTextList = new ArrayList<>();
+
+        tabTextList.add("tab01");
+        tabTextList.add("tab02");
+        tabTextList.add("tab03");
+        tabNumber = tabTextList.size();
+
     }
 
     private void initAttr(AttributeSet attrs, int defStyleAttr) {
@@ -97,43 +141,19 @@ public class YPKTabLayoutView2 extends View {
                 tabTextSize = typedArray.getDimension(index, tabTextSize);
             } else if (index == R.styleable.YPKTabLayoutView_view_bg_corners) {
                 view_bg_corners = typedArray.getDimension(index, view_bg_corners);
+            } else if (index == R.styleable.YPKTabLayoutView_tab_indicator_height) {
+                tabIndicatorHeight = typedArray.getDimension(index, tabIndicatorHeight);
+            } else if (index == R.styleable.YPKTabLayoutView_tab_indicator_spacing) {
+                tabIndicatorSpacing = typedArray.getDimension(index, tabIndicatorSpacing);
+            } else if (index == R.styleable.YPKTabLayoutView_show_indicator) {
+                showTabIndicator = typedArray.getBoolean(index, showTabIndicator);
+            } else if (index == R.styleable.YPKTabLayoutView_show_indicator_select) {
+                showTabIndicatorSelect = typedArray.getBoolean(index, showTabIndicatorSelect);
             }
-
-
         }
         typedArray.recycle();
     }
 
-    RectF rectF_bg;
-    RectF rectF_bg1;
-
-    private void initData() {
-
-        view_bg_corners = DisplayUtil.dp2px(mContext, 5);
-        view_bg = ContextCompat.getColor(mContext, R.color.tab_select_color);
-        selectColor = ContextCompat.getColor(mContext, R.color.tab_normal_color);
-        tabTextColor = ContextCompat.getColor(mContext, R.color.tab_text_color);
-        //默认选中文本和未选中文本是一个颜色值
-        tabSelectTextColor = ContextCompat.getColor(mContext, R.color.tab_text_color);
-        tabTextSize = DisplayUtil.sp2px(mContext, 14);
-        tabTextStyle = Typeface.NORMAL;
-
-        paint = new Paint(Paint.ANTI_ALIAS_FLAG);
-        paint.setStyle(Paint.Style.FILL);
-
-
-        textPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
-        textPaint.setStyle(Paint.Style.FILL);
-        Typeface font = Typeface.create(Typeface.SANS_SERIF, tabTextStyle);
-        textPaint.setTypeface(font);
-
-        tabTextList = new ArrayList<>();
-        tabTextList.add("tab01");
-        tabTextList.add("tab02");
-        tabTextList.add("tab03");
-        tabNumber = tabTextList.size();
-
-    }
 
     public void setSelectTab(int tabPosition) {
         if (tabPosition < tabNumber) {
@@ -171,12 +191,9 @@ public class YPKTabLayoutView2 extends View {
 
 
     private int measureHeight(int measureSpec) {
-
         int result = 0;
-
         int mode = MeasureSpec.getMode(measureSpec);
         int size = MeasureSpec.getSize(measureSpec);
-
         if (mode == MeasureSpec.EXACTLY) {//表示父控件已经确切的指定了子View的大小。
             result = size;
             //System.out.println("YPKTabLayoutView.measureHeight result1=" + result);
@@ -186,12 +203,8 @@ public class YPKTabLayoutView2 extends View {
         } else if (mode == MeasureSpec.UNSPECIFIED) {//默认值，父控件没有给子view任何限制，子View可以设置为任意大小。
             result = customizeViewDefaultHeight;
         }
-
         return result;
-
-
     }
-
 
     @Override
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
@@ -212,6 +225,8 @@ public class YPKTabLayoutView2 extends View {
 
         textPaint.setTextSize(tabTextSize);
         textPaint.setColor(tabTextColor);
+        indicatorPaint.setColor(tabTextColor);
+        indicatorPaint.setStrokeWidth(tabIndicatorHeight);
     }
 
 
@@ -227,21 +242,15 @@ public class YPKTabLayoutView2 extends View {
                 for (int i = 0; i < tabNumber; i++) {
                     if (x <= ((i + 1) * textWidth + i * arcWidth + arcWidth / 2)) {//点击的第一个按钮
                         tabPosition = i;
-
                         if (onTabClickListener != null) {
                             onTabClickListener.tabSelectedListener(tabPosition);
                         }
-
                         invalidate();
                         isHandleClick = true;
-
                         break;
                     }
                 }
-
                 return isHandleClick;
-
-
             case MotionEvent.ACTION_MOVE:
                 break;
             case MotionEvent.ACTION_UP:
@@ -320,6 +329,12 @@ public class YPKTabLayoutView2 extends View {
             canvas.drawPath(pathCenter, paint);
         }
 
+        drawTextContent(canvas);
+
+
+    }
+
+    private void drawTextContent(Canvas canvas) {
         for (int i = 0; i < tabTextList.size(); i++) {
             String strTabText = tabTextList.get(i);
             Rect rectText = new Rect();
@@ -329,22 +344,71 @@ public class YPKTabLayoutView2 extends View {
 
             if (i == tabPosition) {//选中的tab项文本
                 textPaint.setColor(tabSelectTextColor);
+                indicatorPaint.setColor(tabSelectTextColor);
             } else {
                 textPaint.setColor(tabTextColor);
+                if (showTabIndicatorSelect) {
+                    indicatorPaint.setColor(Color.TRANSPARENT);
+                } else {
+                    indicatorPaint.setColor(tabTextColor);
+                }
             }
-
             if (i == 0) {
                 canvas.drawText(strTabText, (textWidth + arcWidth / 2) / 2 - strWidth / 2, viewHeight / 2 + strHeight / 2, textPaint);
+
+                if (showTabIndicator || showTabIndicatorSelect) {
+                    int maxSpace = viewHeight / 2 - strHeight / 2;
+                    if (tabIndicatorSpacing > maxSpace) {
+                        tabIndicatorSpacing = maxSpace;
+                    }
+                    canvas.drawLine(
+                            (textWidth + arcWidth / 2) / 2 - strWidth / 2,
+                            viewHeight / 2 + strHeight / 2 + tabIndicatorSpacing,
+                            (textWidth + arcWidth / 2) / 2 - strWidth / 2 + strWidth,
+                            viewHeight / 2 + strHeight / 2 + tabIndicatorSpacing,
+                            indicatorPaint
+                    );
+                }
+
+
             } else if (i == tabTextList.size() - 1) {
                 canvas.drawText(strTabText, viewWidth - (textWidth + arcWidth / 2) / 2 - strWidth / 2, viewHeight / 2 + strHeight / 2, textPaint);
 
+                if (showTabIndicator || showTabIndicatorSelect) {
+                    int maxSpace = viewHeight / 2 - strHeight / 2;
+                    if (tabIndicatorSpacing > maxSpace) {
+                        tabIndicatorSpacing = maxSpace;
+                    }
+                    canvas.drawLine(
+                            viewWidth - (textWidth + arcWidth / 2) / 2 - strWidth / 2,
+                            viewHeight / 2 + strHeight / 2 + tabIndicatorSpacing,
+                            viewWidth - (textWidth + arcWidth / 2) / 2 - strWidth / 2 + strWidth,
+                            viewHeight / 2 + strHeight / 2 + tabIndicatorSpacing,
+                            indicatorPaint
+                    );
+                }
+
+
             } else {
                 canvas.drawText(strTabText, textWidth * i + arcWidth * (i - 1) + (textWidth + 2 * arcWidth) / 2 - strWidth / 2, viewHeight / 2 + strHeight / 2, textPaint);
+
+                if (showTabIndicator || showTabIndicatorSelect) {
+                    int maxSpace = viewHeight / 2 - strHeight / 2;
+                    if (tabIndicatorSpacing > maxSpace) {
+                        tabIndicatorSpacing = maxSpace;
+                    }
+                    canvas.drawLine(
+                            textWidth * i + arcWidth * (i - 1) + (textWidth + 2 * arcWidth) / 2 - strWidth / 2,
+                            viewHeight / 2 + strHeight / 2 + tabIndicatorSpacing,
+                            textWidth * i + arcWidth * (i - 1) + (textWidth + 2 * arcWidth) / 2 - strWidth / 2 + strWidth,
+                            viewHeight / 2 + strHeight / 2 + tabIndicatorSpacing,
+                            indicatorPaint
+                    );
+                }
+
             }
 
 
         }
-
-
     }
 }

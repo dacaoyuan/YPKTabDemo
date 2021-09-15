@@ -37,6 +37,8 @@ dependencies {
 
 ## 使用方法
 一：在xml布局中添加：
+
+kotlin
 ```
  <com.ypk.library.view.YPKTabLayoutView
         android:id="@+id/mYPKTabLayoutView"
@@ -48,6 +50,22 @@ dependencies {
         app:tabSelectTextColor="#fff"
         app:tabTextSize="15sp"
         app:view_bg_corners="0dp" />
+
+```
+
+java：
+```
+  <com.ypk.library.view.YPKTabLayoutViewJava
+        android:id="@+id/mYPKTabLayoutView4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        app:arcControlX="30"
+        app:show_indicator_select="true"
+        app:tabSelectTextColor="@color/colorAccent"
+        app:tabTextColor="@color/text_33"
+        app:tab_indicator_height="1dp"
+        app:tab_indicator_spacing="5dp" />
 
 ```
 
@@ -95,6 +113,9 @@ tab_indicator_spacing| 指示线的与文字的间隔（单位：dp）
 
 
 ## 版本更新说明：
+### 1.2.3
+1：为了兼容有些项目没有使用kotlin语言，完善了java实现类。
+
 ### 1.2.1
 1：新增了指示器显示。
 
