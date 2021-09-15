@@ -62,6 +62,7 @@ public class YPKTabLayoutViewJava extends View {
 
     //private float tabIndicatorColor = 0;//指示线的颜色
     private float tabIndicatorHeight = 0f;//指示线的高度
+    private float tabIndicatorWidth = 0f;//指示线的宽度
     private float tabIndicatorSpacing = 0f;//指示线的与文字的间隔
 
     RectF rectF_bg;
@@ -143,6 +144,8 @@ public class YPKTabLayoutViewJava extends View {
                 view_bg_corners = typedArray.getDimension(index, view_bg_corners);
             } else if (index == R.styleable.YPKTabLayoutView_tab_indicator_height) {
                 tabIndicatorHeight = typedArray.getDimension(index, tabIndicatorHeight);
+            } else if (index == R.styleable.YPKTabLayoutView_tab_indicator_width) {
+                tabIndicatorWidth = typedArray.getDimension(index, tabIndicatorWidth);
             } else if (index == R.styleable.YPKTabLayoutView_tab_indicator_spacing) {
                 tabIndicatorSpacing = typedArray.getDimension(index, tabIndicatorSpacing);
             } else if (index == R.styleable.YPKTabLayoutView_show_indicator) {
@@ -342,6 +345,7 @@ public class YPKTabLayoutViewJava extends View {
             int strWidth = rectText.width();
             int strHeight = rectText.height();
 
+
             if (i == tabPosition) {//选中的tab项文本
                 textPaint.setColor(tabSelectTextColor);
                 indicatorPaint.setColor(tabSelectTextColor);
@@ -361,13 +365,25 @@ public class YPKTabLayoutViewJava extends View {
                     if (tabIndicatorSpacing > maxSpace) {
                         tabIndicatorSpacing = maxSpace;
                     }
-                    canvas.drawLine(
-                            (textWidth + arcWidth / 2) / 2 - strWidth / 2,
-                            viewHeight / 2 + strHeight / 2 + tabIndicatorSpacing,
-                            (textWidth + arcWidth / 2) / 2 - strWidth / 2 + strWidth,
-                            viewHeight / 2 + strHeight / 2 + tabIndicatorSpacing,
-                            indicatorPaint
-                    );
+
+                    if (tabIndicatorWidth > 0) {
+                        canvas.drawLine(
+                                (textWidth + arcWidth / 2) / 2 - strWidth / 2 + strWidth / 2 - tabIndicatorWidth / 2,
+                                viewHeight / 2 + strHeight / 2 + tabIndicatorSpacing,
+                                (textWidth + arcWidth / 2) / 2 - strWidth / 2 + strWidth / 2 - tabIndicatorWidth / 2 + tabIndicatorWidth,
+                                viewHeight / 2 + strHeight / 2 + tabIndicatorSpacing,
+                                indicatorPaint
+                        );
+                    } else {
+                        canvas.drawLine(
+                                (textWidth + arcWidth / 2) / 2 - strWidth / 2,
+                                viewHeight / 2 + strHeight / 2 + tabIndicatorSpacing,
+                                (textWidth + arcWidth / 2) / 2 - strWidth / 2 + strWidth,
+                                viewHeight / 2 + strHeight / 2 + tabIndicatorSpacing,
+                                indicatorPaint
+                        );
+                    }
+
                 }
 
 
@@ -379,13 +395,27 @@ public class YPKTabLayoutViewJava extends View {
                     if (tabIndicatorSpacing > maxSpace) {
                         tabIndicatorSpacing = maxSpace;
                     }
-                    canvas.drawLine(
-                            viewWidth - (textWidth + arcWidth / 2) / 2 - strWidth / 2,
-                            viewHeight / 2 + strHeight / 2 + tabIndicatorSpacing,
-                            viewWidth - (textWidth + arcWidth / 2) / 2 - strWidth / 2 + strWidth,
-                            viewHeight / 2 + strHeight / 2 + tabIndicatorSpacing,
-                            indicatorPaint
-                    );
+
+                    if (tabIndicatorWidth > 0) {
+                        canvas.drawLine(
+                                viewWidth - (textWidth + arcWidth / 2) / 2 - strWidth / 2+ strWidth / 2 - tabIndicatorWidth / 2,
+                                viewHeight / 2 + strHeight / 2 + tabIndicatorSpacing,
+                                viewWidth - (textWidth + arcWidth / 2) / 2 - strWidth / 2 + strWidth / 2 - tabIndicatorWidth / 2 + tabIndicatorWidth,
+                                viewHeight / 2 + strHeight / 2 + tabIndicatorSpacing,
+                                indicatorPaint
+                        );
+
+                    }else {
+                        canvas.drawLine(
+                                viewWidth - (textWidth + arcWidth / 2) / 2 - strWidth / 2,
+                                viewHeight / 2 + strHeight / 2 + tabIndicatorSpacing,
+                                viewWidth - (textWidth + arcWidth / 2) / 2 - strWidth / 2 + strWidth,
+                                viewHeight / 2 + strHeight / 2 + tabIndicatorSpacing,
+                                indicatorPaint
+                        );
+                    }
+
+
                 }
 
 
@@ -397,13 +427,26 @@ public class YPKTabLayoutViewJava extends View {
                     if (tabIndicatorSpacing > maxSpace) {
                         tabIndicatorSpacing = maxSpace;
                     }
-                    canvas.drawLine(
-                            textWidth * i + arcWidth * (i - 1) + (textWidth + 2 * arcWidth) / 2 - strWidth / 2,
-                            viewHeight / 2 + strHeight / 2 + tabIndicatorSpacing,
-                            textWidth * i + arcWidth * (i - 1) + (textWidth + 2 * arcWidth) / 2 - strWidth / 2 + strWidth,
-                            viewHeight / 2 + strHeight / 2 + tabIndicatorSpacing,
-                            indicatorPaint
-                    );
+
+                    if (tabIndicatorWidth > 0) {
+                        canvas.drawLine(
+                                textWidth * i + arcWidth * (i - 1) + (textWidth + 2 * arcWidth) / 2 - strWidth / 2+ strWidth / 2 - tabIndicatorWidth / 2,
+                                viewHeight / 2 + strHeight / 2 + tabIndicatorSpacing,
+                                textWidth * i + arcWidth * (i - 1) + (textWidth + 2 * arcWidth) / 2 - strWidth / 2 + strWidth / 2 - tabIndicatorWidth / 2 + tabIndicatorWidth,
+                                viewHeight / 2 + strHeight / 2 + tabIndicatorSpacing,
+                                indicatorPaint
+                        );
+                    }else {
+                        canvas.drawLine(
+                                textWidth * i + arcWidth * (i - 1) + (textWidth + 2 * arcWidth) / 2 - strWidth / 2,
+                                viewHeight / 2 + strHeight / 2 + tabIndicatorSpacing,
+                                textWidth * i + arcWidth * (i - 1) + (textWidth + 2 * arcWidth) / 2 - strWidth / 2 + strWidth,
+                                viewHeight / 2 + strHeight / 2 + tabIndicatorSpacing,
+                                indicatorPaint
+                        );
+                    }
+
+
                 }
 
             }

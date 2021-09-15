@@ -19,6 +19,8 @@
         <attr name="show_indicator" format="boolean" />
         <!--指示线的高度-->
         <attr name="tab_indicator_height" format="dimension" />
+        <!--指示线的宽度-->
+        <attr name="tab_indicator_width" format="dimension" />
         <!--指示线的与文字的间隔-->
         <attr name="tab_indicator_spacing" format="dimension" />
     </declare-styleable>
