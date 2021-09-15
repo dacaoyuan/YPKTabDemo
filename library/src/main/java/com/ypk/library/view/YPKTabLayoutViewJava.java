@@ -445,13 +445,8 @@ public class YPKTabLayoutViewJava extends View {
                                 indicatorPaint
                         );
                     }
-
-
                 }
-
             }
-
-
         }
     }
 }

@@ -91,6 +91,7 @@ class YPKTabLayoutView @JvmOverloads constructor(
 
     //private var tabIndicatorColor = 0;//指示线的颜色
     private var tabIndicatorHeight = 0f;//指示线的高度
+    private var tabIndicatorWidth = 0f //指示线的宽度
     private var tabIndicatorSpacing = 0f;//指示线的与文字的间隔
 
     lateinit var rectF_bg: RectF
@@ -155,6 +156,8 @@ class YPKTabLayoutView @JvmOverloads constructor(
                 view_bg_corners = typedArray.getDimension(index, view_bg_corners)
             } else if (index == R.styleable.YPKTabLayoutView_tab_indicator_height) {
                 tabIndicatorHeight = typedArray.getDimension(index, tabIndicatorHeight)
+            } else if (index == R.styleable.YPKTabLayoutView_tab_indicator_width) {
+                tabIndicatorWidth = typedArray.getDimension(index, tabIndicatorWidth)
             } else if (index == R.styleable.YPKTabLayoutView_tab_indicator_spacing) {
                 tabIndicatorSpacing = typedArray.getDimension(index, tabIndicatorSpacing)
             } else if (index == R.styleable.YPKTabLayoutView_show_indicator) {
@@ -389,18 +392,31 @@ class YPKTabLayoutView @JvmOverloads constructor(
                     viewHeight / 2 + strHeight / 2.toFloat(),
                     textPaint!!
                 )
-                if (showTabIndicator||showTabIndicatorSelect) {
+                if (showTabIndicator || showTabIndicatorSelect) {
                     val maxSpace = viewHeight / 2 - strHeight / 2.toFloat()
                     if (tabIndicatorSpacing > maxSpace) {
                         tabIndicatorSpacing = maxSpace;
                     }
-                    canvas.drawLine(
-                        (textWidth + arcWidth / 2) / 2 - strWidth / 2,
-                        viewHeight / 2 + strHeight / 2.toFloat() + tabIndicatorSpacing,
-                        (textWidth + arcWidth / 2) / 2 - strWidth / 2 + strWidth,
-                        viewHeight / 2 + strHeight / 2.toFloat() + tabIndicatorSpacing,
-                        indicatorPaint
-                    )
+
+                    if (tabIndicatorWidth > 0) {
+                        canvas.drawLine(
+                            (textWidth + arcWidth / 2) / 2 - strWidth / 2 + strWidth / 2 - tabIndicatorWidth / 2,
+                            viewHeight / 2 + strHeight / 2.toFloat() + tabIndicatorSpacing,
+                            (textWidth + arcWidth / 2) / 2 - strWidth / 2 + strWidth / 2 - tabIndicatorWidth / 2 + tabIndicatorWidth,
+                            viewHeight / 2 + strHeight / 2.toFloat() + tabIndicatorSpacing,
+                            indicatorPaint
+                        )
+                    } else {
+                        canvas.drawLine(
+                            (textWidth + arcWidth / 2) / 2 - strWidth / 2,
+                            viewHeight / 2 + strHeight / 2.toFloat() + tabIndicatorSpacing,
+                            (textWidth + arcWidth / 2) / 2 - strWidth / 2 + strWidth,
+                            viewHeight / 2 + strHeight / 2.toFloat() + tabIndicatorSpacing,
+                            indicatorPaint
+                        )
+                    }
+
+
                 }
 
 
@@ -411,18 +427,30 @@ class YPKTabLayoutView @JvmOverloads constructor(
                     viewHeight / 2 + strHeight / 2.toFloat(),
                     textPaint!!
                 )
-                if (showTabIndicator||showTabIndicatorSelect) {
+                if (showTabIndicator || showTabIndicatorSelect) {
                     val maxSpace = viewHeight / 2 - strHeight / 2.toFloat()
                     if (tabIndicatorSpacing > maxSpace) {
                         tabIndicatorSpacing = maxSpace;
                     }
-                    canvas.drawLine(
-                        viewWidth - (textWidth + arcWidth / 2) / 2 - strWidth / 2,
-                        viewHeight / 2 + strHeight / 2.toFloat() + tabIndicatorSpacing,
-                        viewWidth - (textWidth + arcWidth / 2) / 2 - strWidth / 2 + strWidth,
-                        viewHeight / 2 + strHeight / 2.toFloat() + tabIndicatorSpacing,
-                        indicatorPaint
-                    )
+
+                    if (tabIndicatorWidth > 0) {
+                        canvas.drawLine(
+                            viewWidth - (textWidth + arcWidth / 2) / 2 - strWidth / 2 + strWidth / 2 - tabIndicatorWidth / 2,
+                            viewHeight / 2 + strHeight / 2.toFloat() + tabIndicatorSpacing,
+                            viewWidth - (textWidth + arcWidth / 2) / 2 - strWidth / 2 + strWidth / 2 - tabIndicatorWidth / 2 + tabIndicatorWidth,
+                            viewHeight / 2 + strHeight / 2.toFloat() + tabIndicatorSpacing,
+                            indicatorPaint
+                        )
+                    } else {
+                        canvas.drawLine(
+                            viewWidth - (textWidth + arcWidth / 2) / 2 - strWidth / 2,
+                            viewHeight / 2 + strHeight / 2.toFloat() + tabIndicatorSpacing,
+                            viewWidth - (textWidth + arcWidth / 2) / 2 - strWidth / 2 + strWidth,
+                            viewHeight / 2 + strHeight / 2.toFloat() + tabIndicatorSpacing,
+                            indicatorPaint
+                        )
+                    }
+
                 }
 
 
@@ -434,18 +462,30 @@ class YPKTabLayoutView @JvmOverloads constructor(
                     textPaint!!
                 )
 
-                if (showTabIndicator||showTabIndicatorSelect) {
+                if (showTabIndicator || showTabIndicatorSelect) {
                     val maxSpace = viewHeight / 2 - strHeight / 2.toFloat()
                     if (tabIndicatorSpacing > maxSpace) {
                         tabIndicatorSpacing = maxSpace;
                     }
-                    canvas.drawLine(
-                        textWidth * i + arcWidth * (i - 1) + (textWidth + 2 * arcWidth) / 2 - strWidth / 2,
-                        viewHeight / 2 + strHeight / 2.toFloat() + tabIndicatorSpacing,
-                        textWidth * i + arcWidth * (i - 1) + (textWidth + 2 * arcWidth) / 2 - strWidth / 2 + strWidth,
-                        viewHeight / 2 + strHeight / 2.toFloat() + tabIndicatorSpacing,
-                        indicatorPaint
-                    )
+
+                    if (tabIndicatorWidth > 0) {
+                        canvas.drawLine(
+                            textWidth * i + arcWidth * (i - 1) + (textWidth + 2 * arcWidth) / 2 - strWidth / 2 + strWidth / 2 - tabIndicatorWidth / 2,
+                            viewHeight / 2 + strHeight / 2.toFloat() + tabIndicatorSpacing,
+                            textWidth * i + arcWidth * (i - 1) + (textWidth + 2 * arcWidth) / 2 - strWidth / 2 + strWidth / 2 - tabIndicatorWidth / 2 + tabIndicatorWidth,
+                            viewHeight / 2 + strHeight / 2.toFloat() + tabIndicatorSpacing,
+                            indicatorPaint
+                        )
+                    } else {
+                        canvas.drawLine(
+                            textWidth * i + arcWidth * (i - 1) + (textWidth + 2 * arcWidth) / 2 - strWidth / 2,
+                            viewHeight / 2 + strHeight / 2.toFloat() + tabIndicatorSpacing,
+                            textWidth * i + arcWidth * (i - 1) + (textWidth + 2 * arcWidth) / 2 - strWidth / 2 + strWidth,
+                            viewHeight / 2 + strHeight / 2.toFloat() + tabIndicatorSpacing,
+                            indicatorPaint
+                        )
+                    }
+
                 }
 
             }

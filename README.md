@@ -108,7 +108,9 @@ view_bg_corners| 控件的圆角大小（单位：dp）
 show_indicator_select| 是否只有选中才显示指示线
 show_indicator| 是否显示指示线
 tab_indicator_height| 指示线的高度（单位：dp）
+tab_indicator_width| 指示线的宽度（单位：dp）
 tab_indicator_spacing| 指示线的与文字的间隔（单位：dp）
+
 
 
 
