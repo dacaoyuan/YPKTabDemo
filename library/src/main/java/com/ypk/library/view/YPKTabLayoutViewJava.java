@@ -85,7 +85,7 @@ public class YPKTabLayoutViewJava extends View {
 
     private void setDefaultData() {
 
-        view_bg_corners = DisplayUtil.dp2px(mContext, 5);
+        view_bg_corners = DisplayUtil.dp2px(mContext, 5f);
         view_bg = ContextCompat.getColor(mContext, R.color.tab_select_color);
         selectColor = ContextCompat.getColor(mContext, R.color.tab_normal_color);
         tabTextColor = ContextCompat.getColor(mContext, R.color.tab_text_color);
@@ -101,7 +101,7 @@ public class YPKTabLayoutViewJava extends View {
         indicatorPaint.setStyle(Paint.Style.FILL);
         indicatorPaint.setTypeface(font);
 
-        tabTextSize = DisplayUtil.sp2px(mContext, 14);
+        tabTextSize = DisplayUtil.sp2px(mContext, 14f);
         tabTextStyle = Typeface.NORMAL;
         paint = new Paint(Paint.ANTI_ALIAS_FLAG);
         paint.setStyle(Paint.Style.FILL);
