@@ -1,5 +1,5 @@
 
-![](https://img.shields.io/badge/release-v1.2.3-brightgreen.svg)
+![](https://img.shields.io/badge/release-v1.2.4-brightgreen.svg)
 
 
 <div align=center>
@@ -28,7 +28,7 @@ Add the dependency
 ```
 dependencies {
 
-	  implementation 'com.github.dacaoyuan:YPKTabDemo:1.2.2'
+	  implementation 'com.github.dacaoyuan:YPKTabDemo:1.2.4'
 
 }
 
@@ -115,6 +115,9 @@ tab_indicator_spacing| 指示线的与文字的间隔（单位：dp）
 
 
 ## 版本更新说明：
+### 1.2.4
+1：添加了指示线的宽度设置
+
 ### 1.2.3
 1：为了兼容有些项目没有使用kotlin语言，完善了java实现类，同时支持kotlin和java。
 
