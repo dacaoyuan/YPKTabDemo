@@ -73,4 +73,37 @@
         app:tab_indicator_spacing="5dp"
         app:tab_indicator_width="15dp" />
 
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.ypk.library.view.YPKTabLayoutViewJava
+            android:id="@+id/mYPKTabLayoutView5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            app:arcControlX="30"
+            app:show_indicator_select="true"
+            app:tabSelectTextColor="#118DD5"
+            app:tabTextColor="#09326A"
+            app:tab_indicator_height="2dp"
+            app:tab_indicator_spacing="10dp"
+            app:tab_indicator_width="20dp" />
+
+        <TextView
+            android:paddingVertical="1dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end|center_vertical"
+            android:layout_marginRight="16dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/mei_red_bg"
+            android:paddingHorizontal="5dp"
+            android:text="点击认证"
+            android:textColor="@color/white"
+            android:textSize="10sp" />
+
+    </FrameLayout>
+
 </LinearLayout>

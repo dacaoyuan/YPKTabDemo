@@ -58,6 +58,12 @@ class MainActivity : AppCompatActivity() {
         tabTextList4.add("Java3");
         tabTextList4.add("Java4");
         mYPKTabLayoutView4.setTabTextList(tabTextList4);
+
+
+        val tabTextList5: MutableList<String> = ArrayList<String>()
+        tabTextList5.add("查询行程");
+        tabTextList5.add("实名认证");
+        mYPKTabLayoutView5.setTabTextList(tabTextList5);
     }
 
 
